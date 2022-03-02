@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // get the weather before the UI is built
   }
 
-  late List<Widget> Posts;
+  late List<Widget> post;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.white54,
         ),
         body: ListView(
-          children: Posts == null ? [const Text('Loading')] : Posts,
+          children: post == null ? [const Text('Loading')] : post,
         ));
   }
 
@@ -87,6 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
       return list;
     }
 
-    Posts = buildProperties();
+    post = buildProperties();
   }
 }
