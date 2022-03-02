@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     getposts().then((value) {
       setState(() {});
     });
-    // get the weather before the UI is built
+    // get the Posts before the UI is built
   }
 
   late List<Widget> post;
