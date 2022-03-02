@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class PostItemd extends StatefulWidget {
-  final String description;
+  final String body;
   final String img;
-  final String username;
+  final String name;
   final String title;
 
   const PostItemd({
     Key? key,
-    required this.img,
-    required this.username,
-    required this.description,
+    required this.body,
     required this.title,
+    required this.img,
+    required this.name,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,27 @@ class PostItemd extends StatefulWidget {
 class PostItemdState extends State<PostItemd> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              height: 50,
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: NetworkImage(widget.img), fit: BoxFit.fill)),
+            ),
+            const SizedBox(width: 10),
+            Text(widget.name),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Text(widget.title),
+        Text(widget.body),
+        const Divider(),
+      ],
+    );
   }
 }

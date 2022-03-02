@@ -42,28 +42,23 @@ class _MyHomePageState extends State<MyHomePage> {
     // get the weather before the UI is built
   }
 
+  late List<Widget> Posts;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Posts', style: TextStyle(color: Colors.black)),
-        centerTitle: true,
-        backgroundColor: Colors.white54,
-      ),
-      body: ListView.builder(
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return const PostItemd(
-              img: '',
-              username: '',
-              description: '',
-              title: '',
-            );
-          }),
-    );
+        appBar: AppBar(
+          title: const Text('Posts', style: TextStyle(color: Colors.black)),
+          centerTitle: true,
+          backgroundColor: Colors.white54,
+        ),
+        body: ListView(
+          children: Posts == null ? [const Text('Loading')] : Posts,
+        ));
   }
 
   getposts() async {
+    //for getting the posts
     var url = Uri.parse("https://engineering.league.dev/challenge/api/posts");
 
     http.Response response = await http.get(url,
@@ -71,7 +66,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var results = jsonDecode(response.body);
     print(results);
-    String title = results[0]['title'];
-    String body = results[0]['body'];
+
+    // for getting users
+    var url2 = Uri.parse("https://engineering.league.dev/challenge/api/users");
+    http.Response response2 = await http.get(url2,
+        headers: {'x-access-token': 'DED0F00254CC145CD11BBA6BA35552FA'});
+
+    var results2 = jsonDecode(response2.body);
+
+    List<Widget> buildProperties() {
+      List<Widget> list = [];
+      for (var i = 0; i < results.length; i++) {
+        list.add(PostItemd(
+          title: results[i]['title'],
+          body: results[i]['body'],
+          img: results2[0][i]["avatar"]['medium'],
+          name: results2[0][i]["name"],
+        ));
+      }
+      return list;
+    }
+
+    Posts = buildProperties();
   }
 }
