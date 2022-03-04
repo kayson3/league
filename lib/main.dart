@@ -79,8 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
         list.add(PostItemd(
           title: results[i]['title'],
           body: results[i]['body'],
-          img: results2[0][i]["avatar"]['medium'],
-          name: results2[0][i]["name"],
+          img: results2[i]["avatar"]['medium'],
+          name: results2[i]["name"],
         ));
       }
       return list;
